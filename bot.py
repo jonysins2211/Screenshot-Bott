@@ -213,5 +213,9 @@ def run_health_server():
 
 threading.Thread(target=run_health_server, daemon=True).start()
 
-print("✅ Bot is starting polling and listening for updates...")
-bot.run()
+async def main():
+    await bot.start()
+    print("✅ Bot is up and running...")
+    await asyncio.get_event_loop().create_future()  # Keep alive
+
+asyncio.run(main())
