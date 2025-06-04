@@ -213,4 +213,5 @@ def run_health_server():
 
 threading.Thread(target=run_health_server, daemon=True).start()
 
+print("✅ Bot is starting polling and listening for updates...")
 bot.run()
