@@ -1,6 +1,5 @@
-pyrogram
-pymongo
+pyrogram==2.0.106
 tgcrypto
-asyncio
-ffmpeg-python
+pymongo
 python-dotenv
+ffmpeg-python
