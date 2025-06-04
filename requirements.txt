@@ -1,3 +1,6 @@
 pyrogram
+pymongo
 tgcrypto
+asyncio
 ffmpeg-python
+python-dotenv
