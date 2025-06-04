@@ -216,7 +216,7 @@ def run_health_server():
 threading.Thread(target=run_health_server, daemon=True).start()
 
 async def main():
-    await bot.start()
+    await bot.start()
     print("✅ Bot is up and running...")
     await idle()  # <-- Keeps the bot alive and responsive
 
