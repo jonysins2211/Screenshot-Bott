@@ -11,6 +11,8 @@ from pymongo import MongoClient
 from pyrogram.errors import FloodWait, PeerIdInvalid
 from dotenv import load_dotenv
 from http.server import BaseHTTPRequestHandler, HTTPServer
+from pyrogram import idle
+
 
 # Load environment variables
 load_dotenv()
@@ -214,8 +216,10 @@ def run_health_server():
 threading.Thread(target=run_health_server, daemon=True).start()
 
 async def main():
-    await bot.start()
-    print("✅ Bot is up and running...")
-    await asyncio.get_event_loop().create_future()  # Keep alive
+    await bot.start()
+    print("✅ Bot is up and running...")
+    await idle()  # <-- Keeps the bot alive and responsive
+
+   # await asyncio.get_event_loop().create_future()  # Keep alive
 
 asyncio.run(main())
