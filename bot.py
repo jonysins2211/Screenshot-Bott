@@ -2,13 +2,15 @@ import os
 import ffmpeg
 import shlex
 import subprocess
+import asyncio
+import threading
 from datetime import datetime
 from pyrogram import Client, filters
 from pyrogram.types import *
 from pymongo import MongoClient
 from pyrogram.errors import FloodWait, PeerIdInvalid
-import asyncio
 from dotenv import load_dotenv
+from http.server import BaseHTTPRequestHandler, HTTPServer
 
 # Load environment variables
 load_dotenv()
@@ -198,5 +200,17 @@ async def handle_screenshot_selection(client, callback_query: CallbackQuery):
     for f in temp_files:
         if os.path.exists(f):
             os.remove(f)
+
+class HealthCheckHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.end_headers()
+        self.wfile.write(b"OK")
+
+def run_health_server():
+    server = HTTPServer(("0.0.0.0", 8080), HealthCheckHandler)
+    server.serve_forever()
+
+threading.Thread(target=run_health_server, daemon=True).start()
 
 bot.run()
